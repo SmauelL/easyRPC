@@ -236,7 +236,7 @@ func Dial(network, address string, opts ...*Option) (client *Client, err error) 
 	if err != nil {
 		return nil, err
 	}
-	// close the connection if client is nil
+
 	defer func() {
 		if err != nil {
 			_ = conn.Close()
