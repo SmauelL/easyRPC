@@ -1,7 +1,7 @@
 package main
 
 import (
-	easyRPC "easyRPC"
+	"easyRPC"
 	"fmt"
 	"log"
 	"net"
@@ -10,6 +10,7 @@ import (
 )
 
 func startServer(addr chan string) {
+	// pick a free port
 	l, err := net.Listen("tcp", ":0")
 	if err != nil {
 		log.Fatal("network error:", err)
@@ -33,7 +34,7 @@ func main() {
 		wg.Add(1)
 		go func(i int) {
 			defer wg.Done()
-			args := fmt.Sprintf("easyRPC req %d", i)
+			args := fmt.Sprintf("geerpc req %d", i)
 			var reply string
 			if err := client.Call("Foo.Sum", args, &reply); err != nil {
 				log.Fatal("call Foo.Sum error:", err)
